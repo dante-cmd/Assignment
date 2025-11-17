@@ -143,3 +143,8 @@ This project requires the following Python packages:
 - json
 - argparse
 - collections
+
+
+## Thanks
+
+- https://github.com/schapman1974/tinymongo

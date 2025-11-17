@@ -6,6 +6,7 @@ items_predict: "items_predict"
 dim: "dim"
 items: "items"
 items_bim: "items_bim"
+room_log: "room_log"
 log_file: "pipeline.log"
 excel_path: "raw"
 periodo_predict: null

@@ -83,3 +83,54 @@
 2025-11-11 00:55:44 - INFO - START and END has no null values
 2025-11-11 00:55:44 - INFO - START and END are in time
 2025-11-11 00:55:44 - INFO - FLAG_REWARD has no null values
+2025-11-14 00:17:03 - INFO - CURSO_ACTUAL has no null values fact_prog_acad
+2025-11-14 00:17:04 - INFO - PERIODO_FRANJA has no null values fact_prog_acad
+2025-11-14 00:17:04 - INFO - LINEA_DE_NEGOCIO has no null values fact_prog_acad
+2025-11-14 00:17:04 - INFO - VAC_ACAD_ESTANDAR has no null values fact_prog_acad
+2025-11-14 00:17:04 - INFO - DIAS has no null values fact_prog_acad
+2025-11-14 00:17:04 - INFO - CURSO_ACTUAL has no null values fact_predict
+2025-11-14 00:17:04 - INFO - PERIODO_FRANJA has no null values fact_predict
+2025-11-14 00:17:04 - INFO - LINEA_DE_NEGOCIO has no null values fact_predict
+2025-11-14 00:17:04 - INFO - VAC_ACAD_ESTANDAR has no null values fact_predict
+2025-11-14 00:17:04 - INFO - DIAS has no null values fact_predict
+2025-11-14 00:17:04 - INFO - AFORO has no null values
+2025-11-14 00:17:04 - INFO - REWARD has no null values
+2025-11-14 00:17:04 - INFO - MIN and MAX has no null values
+2025-11-14 00:17:04 - INFO - START and END are in time
+2025-11-14 00:17:04 - INFO - START and END has no null values
+2025-11-14 00:17:04 - INFO - START and END are in time
+2025-11-14 00:17:04 - INFO - FLAG_REWARD has no null values
+2025-11-14 01:43:10 - INFO - CURSO_ACTUAL has no null values fact_prog_acad
+2025-11-14 01:43:10 - INFO - PERIODO_FRANJA has no null values fact_prog_acad
+2025-11-14 01:43:10 - INFO - LINEA_DE_NEGOCIO has no null values fact_prog_acad
+2025-11-14 01:43:10 - INFO - VAC_ACAD_ESTANDAR has no null values fact_prog_acad
+2025-11-14 01:43:10 - INFO - DIAS has no null values fact_prog_acad
+2025-11-14 01:43:10 - INFO - CURSO_ACTUAL has no null values fact_predict
+2025-11-14 01:43:10 - INFO - PERIODO_FRANJA has no null values fact_predict
+2025-11-14 01:43:10 - INFO - LINEA_DE_NEGOCIO has no null values fact_predict
+2025-11-14 01:43:10 - INFO - VAC_ACAD_ESTANDAR has no null values fact_predict
+2025-11-14 01:43:10 - INFO - DIAS has no null values fact_predict
+2025-11-14 01:43:10 - INFO - AFORO has no null values
+2025-11-14 01:43:10 - INFO - REWARD has no null values
+2025-11-14 01:43:10 - INFO - MIN and MAX has no null values
+2025-11-14 01:43:10 - INFO - START and END are in time
+2025-11-14 01:43:10 - INFO - START and END has no null values
+2025-11-14 01:43:10 - INFO - START and END are in time
+2025-11-14 01:43:10 - INFO - FLAG_REWARD has no null values
+2025-11-14 18:04:45 - INFO - CURSO_ACTUAL has no null values fact_prog_acad
+2025-11-14 18:04:45 - INFO - PERIODO_FRANJA has no null values fact_prog_acad
+2025-11-14 18:04:45 - INFO - LINEA_DE_NEGOCIO has no null values fact_prog_acad
+2025-11-14 18:04:45 - INFO - VAC_ACAD_ESTANDAR has no null values fact_prog_acad
+2025-11-14 18:04:45 - INFO - DIAS has no null values fact_prog_acad
+2025-11-14 18:04:45 - INFO - CURSO_ACTUAL has no null values fact_predict
+2025-11-14 18:04:45 - INFO - PERIODO_FRANJA has no null values fact_predict
+2025-11-14 18:04:45 - INFO - LINEA_DE_NEGOCIO has no null values fact_predict
+2025-11-14 18:04:45 - INFO - VAC_ACAD_ESTANDAR has no null values fact_predict
+2025-11-14 18:04:45 - INFO - DIAS has no null values fact_predict
+2025-11-14 18:04:45 - INFO - AFORO has no null values
+2025-11-14 18:04:45 - INFO - REWARD has no null values
+2025-11-14 18:04:45 - INFO - MIN and MAX has no null values
+2025-11-14 18:04:45 - INFO - START and END are in time
+2025-11-14 18:04:45 - INFO - START and END has no null values
+2025-11-14 18:04:45 - INFO - START and END are in time
+2025-11-14 18:04:45 - INFO - FLAG_REWARD has no null values

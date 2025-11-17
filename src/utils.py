@@ -3,7 +3,6 @@ from dateutil.relativedelta import relativedelta
 import os
 import yaml
 
-
 def get_n_lags(periodo: int, n: int):
     periodo_date = datetime.strptime(str(periodo), '%Y%m')
     return int((periodo_date - relativedelta(months=n)).strftime('%Y%m'))
@@ -29,8 +28,9 @@ def clean_logs(log_path: str, log_file: str):
 
 
 if __name__ == '__main__':
-    with open('config.yaml', 'r') as f:
-        config = yaml.safe_load(f)
-    log_path = config['log_path']
-    log_file = config['log_file']
-    clean_logs(log_path, log_file)
+    pass
+    # with open('config.yaml', 'r') as f:
+    #     config = yaml.safe_load(f)
+    # log_path = config['log_path']
+    # log_file = config['log_file']
+    # clean_logs(log_path, log_file)
