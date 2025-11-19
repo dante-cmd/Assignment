@@ -134,3 +134,37 @@
 2025-11-14 18:04:45 - INFO - START and END has no null values
 2025-11-14 18:04:45 - INFO - START and END are in time
 2025-11-14 18:04:45 - INFO - FLAG_REWARD has no null values
+2025-11-19 15:11:22 - INFO - CURSO_ACTUAL has no null values fact_prog_acad
+2025-11-19 15:11:22 - INFO - PERIODO_FRANJA has no null values fact_prog_acad
+2025-11-19 15:11:22 - INFO - LINEA_DE_NEGOCIO has no null values fact_prog_acad
+2025-11-19 15:11:22 - INFO - VAC_ACAD_ESTANDAR has no null values fact_prog_acad
+2025-11-19 15:11:22 - INFO - DIAS has no null values fact_prog_acad
+2025-11-19 15:11:22 - INFO - CURSO_ACTUAL has no null values fact_predict
+2025-11-19 15:11:22 - INFO - PERIODO_FRANJA has no null values fact_predict
+2025-11-19 15:11:22 - INFO - LINEA_DE_NEGOCIO has no null values fact_predict
+2025-11-19 15:11:22 - INFO - VAC_ACAD_ESTANDAR has no null values fact_predict
+2025-11-19 15:11:22 - INFO - DIAS has no null values fact_predict
+2025-11-19 15:11:22 - INFO - AFORO has no null values
+2025-11-19 15:11:22 - INFO - REWARD has no null values
+2025-11-19 15:11:22 - INFO - MIN and MAX has no null values
+2025-11-19 15:11:22 - INFO - START and END are in time
+2025-11-19 15:11:22 - INFO - START and END has no null values
+2025-11-19 15:11:22 - INFO - START and END are in time
+2025-11-19 15:11:22 - INFO - FLAG_REWARD has no null values
+2025-11-19 15:12:14 - INFO - CURSO_ACTUAL has no null values fact_prog_acad
+2025-11-19 15:12:14 - INFO - PERIODO_FRANJA has no null values fact_prog_acad
+2025-11-19 15:12:14 - INFO - LINEA_DE_NEGOCIO has no null values fact_prog_acad
+2025-11-19 15:12:14 - INFO - VAC_ACAD_ESTANDAR has no null values fact_prog_acad
+2025-11-19 15:12:14 - INFO - DIAS has no null values fact_prog_acad
+2025-11-19 15:12:14 - INFO - CURSO_ACTUAL has no null values fact_predict
+2025-11-19 15:12:14 - INFO - PERIODO_FRANJA has no null values fact_predict
+2025-11-19 15:12:14 - INFO - LINEA_DE_NEGOCIO has no null values fact_predict
+2025-11-19 15:12:14 - INFO - VAC_ACAD_ESTANDAR has no null values fact_predict
+2025-11-19 15:12:14 - INFO - DIAS has no null values fact_predict
+2025-11-19 15:12:14 - INFO - AFORO has no null values
+2025-11-19 15:12:14 - INFO - REWARD has no null values
+2025-11-19 15:12:14 - INFO - MIN and MAX has no null values
+2025-11-19 15:12:14 - INFO - START and END are in time
+2025-11-19 15:12:14 - INFO - START and END has no null values
+2025-11-19 15:12:14 - INFO - START and END are in time
+2025-11-19 15:12:14 - INFO - FLAG_REWARD has no null values

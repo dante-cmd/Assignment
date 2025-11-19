@@ -23,23 +23,23 @@ if __name__ == '__main__':
     items = config['items']
     items_bim = config['items_bim']
     room_log = config['room_log']
-    monty_client = get_monty_client()
-    periodo = 202508
-    sede = 'San Miguel'
+    # monty_client = get_monty_client()
+    periodo = 202511
+    sede = 'Lima Norte Satélite'
     rank = Rank(periodo, sede, data_path, room_log, items, items_predict)
     # dias_ = ["LUN", "MAR"]
     # franjas_ = ["07:00 - 08:30", "08:45 - 10:15"]
 
     start = time.time()
-    result = rank.run_simulation(True)
+    result = rank.run_simulation(True, 10000)
     
-    # result= rank.get_reward_sedes()
+    # result = rank.get_room_log()
     # print(len(result))
     # result = rank.assign_aulas(room_log, franjas_ ,dias_, '101')
     # print(rank.test_assign_aulas(room_log, franjas_ ,dias_, '101'))
     # ww = rank.get_aulas_disponibles(result, franjas_ ,dias_)
     # ww_2 = rank.get_aulas_disponibles(room_log, franjas_ ,dias_)
-    print("get result",time.time() - start, datetime.today())
+    # print("get result",time.time() - start, datetime.today())
     # print(ww, ww_2)
     # print(result, datetime.today())
     # import pandas as pd

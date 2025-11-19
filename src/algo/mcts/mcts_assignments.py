@@ -6,7 +6,7 @@ import math, random, time
 import argparse
 import os
 import multiprocessing
-from src.etl.load_json import DataBase, DataLakeLoader
+from src.etl.load_json import DataLakeLoader
 
 
 class DataSet:

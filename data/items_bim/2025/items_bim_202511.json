@@ -172,7 +172,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "B00BP",
         "HORARIO": "12:45 - 16:21",
         "AULA": "303",
@@ -211,7 +211,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "JR1SP",
         "HORARIO": "08:55 - 10:36",
         "AULA": "103",
@@ -230,7 +230,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "JR1SP",
         "HORARIO": "10:50 - 12:31",
         "AULA": "102",
@@ -344,7 +344,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "K01S",
         "HORARIO": "12:45 - 14:26",
         "AULA": "103",
@@ -401,7 +401,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "K01S",
         "HORARIO": "10:50 - 12:31",
         "AULA": "101",
@@ -458,7 +458,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "KN1SP",
         "HORARIO": "12:45 - 14:26",
         "AULA": "102",
@@ -496,7 +496,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "PK1SP",
         "HORARIO": "12:45 - 14:26",
         "AULA": "101",
@@ -686,7 +686,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "C03S",
         "HORARIO": "10:50 - 12:31",
         "AULA": "306",
@@ -762,7 +762,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "C04S",
         "HORARIO": "08:55 - 10:36",
         "AULA": "106",
@@ -857,7 +857,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "C05S",
         "HORARIO": "10:50 - 12:31",
         "AULA": "307",
@@ -952,7 +952,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "K02S",
         "HORARIO": "10:50 - 12:31",
         "AULA": "104",
@@ -971,7 +971,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "K02S",
         "HORARIO": "12:45 - 14:26",
         "AULA": "304",
@@ -1009,7 +1009,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "K03S",
         "HORARIO": "10:50 - 12:31",
         "AULA": "201",
@@ -1237,7 +1237,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "K04S",
         "HORARIO": "08:55 - 10:36",
         "AULA": "104",
@@ -1256,7 +1256,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "K04S",
         "HORARIO": "10:50 - 12:31",
         "AULA": "204",
@@ -1294,7 +1294,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "K05S",
         "HORARIO": "10:50 - 12:31",
         "AULA": "206",
@@ -1408,7 +1408,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "K06S",
         "HORARIO": "08:55 - 10:36",
         "AULA": "105",
@@ -1427,7 +1427,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "KN2SP",
         "HORARIO": "12:45 - 14:26",
         "AULA": "106",
@@ -1484,7 +1484,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "KN3SP",
         "HORARIO": "12:45 - 14:26",
         "AULA": "104",
@@ -1541,7 +1541,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "PK4SP",
         "HORARIO": "12:45 - 14:26",
         "AULA": "105",
@@ -1826,7 +1826,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "JR2SP",
         "HORARIO": "08:55 - 10:36",
         "AULA": "323",
@@ -1845,7 +1845,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "JR2SP",
         "HORARIO": "10:50 - 12:31",
         "AULA": "308",
@@ -1959,7 +1959,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "JR3SP",
         "HORARIO": "10:50 - 12:31",
         "AULA": "301",
@@ -2263,7 +2263,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "JR4SP",
         "HORARIO": "10:50 - 12:31",
         "AULA": "316",
@@ -2282,7 +2282,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "JR4SP",
         "HORARIO": "10:50 - 12:31",
         "AULA": "322",
@@ -2301,7 +2301,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "JR4SP",
         "HORARIO": "10:50 - 12:31",
         "AULA": "317",
@@ -2320,7 +2320,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "JR4SP",
         "HORARIO": "08:55 - 10:36",
         "AULA": "311",
@@ -2377,7 +2377,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "JR5SP",
         "HORARIO": "08:55 - 10:36",
         "AULA": "306",
@@ -2396,7 +2396,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "JR5SP",
         "HORARIO": "10:50 - 12:31",
         "AULA": "303",
@@ -2548,7 +2548,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "JR6SP",
         "HORARIO": "10:50 - 12:31",
         "AULA": "324",
@@ -2605,7 +2605,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "JR6SP",
         "HORARIO": "08:55 - 10:36",
         "AULA": "316",
@@ -2662,7 +2662,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "JR7SP",
         "HORARIO": "10:50 - 12:31",
         "AULA": "325",
@@ -2681,7 +2681,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "JR7SP",
         "HORARIO": "08:55 - 10:36",
         "AULA": "305",
@@ -2852,7 +2852,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "JR8SP",
         "HORARIO": "08:55 - 10:36",
         "AULA": "406",
@@ -2890,7 +2890,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "JR8SP",
         "HORARIO": "14:40 - 16:21",
         "AULA": "102",
@@ -2909,7 +2909,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "PT1SP",
         "HORARIO": "08:55 - 10:36",
         "AULA": "321",
@@ -2928,7 +2928,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "PT1SP",
         "HORARIO": "10:50 - 12:31",
         "AULA": "405",
@@ -3118,7 +3118,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "PT2SP",
         "HORARIO": "10:50 - 12:31",
         "AULA": "406",
@@ -3194,7 +3194,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "PT3SP",
         "HORARIO": "08:55 - 10:36",
         "AULA": "322",
@@ -3308,7 +3308,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "PT4SP",
         "HORARIO": "08:55 - 10:36",
         "AULA": "317",
@@ -3327,7 +3327,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "PT4SP",
         "HORARIO": "10:50 - 12:31",
         "AULA": "323",
@@ -3460,7 +3460,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "PT5SP",
         "HORARIO": "10:50 - 12:31",
         "AULA": "415",
@@ -3479,7 +3479,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "PT5SP",
         "HORARIO": "08:55 - 10:36",
         "AULA": "324",
@@ -3536,7 +3536,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "PT6SP",
         "HORARIO": "08:55 - 10:36",
         "AULA": "325",
@@ -3555,7 +3555,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "PT6SP",
         "HORARIO": "10:50 - 12:31",
         "AULA": "416",
@@ -3669,7 +3669,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "T01SP",
         "HORARIO": "10:50 - 12:31",
         "AULA": "302",
@@ -3707,7 +3707,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "T02SP",
         "HORARIO": "10:50 - 12:31",
         "AULA": "418",
@@ -3764,7 +3764,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "T03SP",
         "HORARIO": "08:55 - 10:36",
         "AULA": "405",
@@ -3783,7 +3783,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "T04SP",
         "HORARIO": "08:55 - 10:36",
         "AULA": "318",
@@ -3821,7 +3821,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "T06SP",
         "HORARIO": "10:50 - 12:31",
         "AULA": "417",
@@ -3840,7 +3840,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "B01BP",
         "HORARIO": "12:45 - 16:21",
         "AULA": "307",
@@ -3860,7 +3860,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "B02BP",
         "HORARIO": "12:45 - 16:21",
         "AULA": "308",
@@ -3900,7 +3900,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "B03BP",
         "HORARIO": "12:45 - 16:21",
         "AULA": "309",
@@ -3920,7 +3920,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "B04BP",
         "HORARIO": "12:45 - 16:21",
         "AULA": "406",
@@ -3980,7 +3980,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "B10BP",
         "HORARIO": "12:45 - 16:21",
         "AULA": "316",
@@ -4135,7 +4135,7 @@
     },
     {
         "PERIODO": 202511,
-        "SEDE": "Lima Norte Satélite",
+        "SEDE": "Lima Norte SatÃ©lite",
         "CURSO_ACTUAL": "JR1SP",
         "HORARIO": "14:40 - 16:21",
         "AULA": "302",
