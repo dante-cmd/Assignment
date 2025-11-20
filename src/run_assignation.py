@@ -1,11 +1,16 @@
 from algo.hierarchy.rank import Rank
-from database.database import get_sqlite_session, engine, get_monty_client
+from algo.data import Data
+from algo.mcts.mcts_assignments_v2 import run_mcts
+from database.database import get_sqlite_session, engine
+# get_monty_client
 import time
 import yaml
 from datetime import datetime
 
 
 if __name__ == '__main__':
+    start = time.time()
+
     with open('config.yaml', 'r') as file:
         config = yaml.safe_load(file)
 
@@ -25,13 +30,16 @@ if __name__ == '__main__':
     room_log = config['room_log']
     # monty_client = get_monty_client()
     periodo = 202511
-    sede = 'Lima Norte Satélite'
-    rank = Rank(periodo, sede, data_path, room_log, items, items_predict)
+    sede = 'Ica'
+    # rank = Rank(periodo, sede, data_path, room_log, items, items_predict)
     # dias_ = ["LUN", "MAR"]
     # franjas_ = ["07:00 - 08:30", "08:45 - 10:15"]
 
-    start = time.time()
-    result = rank.run_simulation(True, 10000)
+    
+    # result = rank.run_simulation(True, 5)
+
+    run_mcts(periodo, sede, data_path, room_log, items, items_predict, 5000)
+
     
     # result = rank.get_room_log()
     # print(len(result))

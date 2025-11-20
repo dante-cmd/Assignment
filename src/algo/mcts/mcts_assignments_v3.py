@@ -13,6 +13,11 @@ import re
 import time
 import json
 from utils import assign_aulas
+import copy
+import math
+import random
+import threading
+from concurrent.futures import ThreadPoolExecutor
 from algo.data import Data
 
 
@@ -296,6 +301,149 @@ def run_mcts(periodo, sede, data_path, room_log_path,items_path, items_predict_p
     # Path('../../output').mkdir(exist_ok=True)
 
     # df.to_excel('output/assignments_{}.xlsx'.format(sede), index=False)
+
+
+# ===============================
+# Node Class (with per-node Lock)
+# ===============================
+class Node:
+    def __init__(self, move=None, parent=None, untried_actions=None):
+        self.move = move
+        self.parent = parent
+        self.children = []
+        self.untried_actions = untried_actions[:] if untried_actions else []
+        self.visits = 0
+        self.w = 0.0
+        self.lock = threading.Lock()  # <-- Lock for this node
+
+    def add_child(self, move, state):
+        with self.lock:
+            if move in self.untried_actions:
+                self.untried_actions.remove(move)
+            child_node = Node(
+                move=move,
+                parent=self,
+                untried_actions=state.get_legal_moves()
+            )
+            self.children.append(child_node)
+        return child_node
+
+    def update(self, reward):
+        with self.lock:
+            self.visits += 1
+            self.w += reward
+
+    def get_untried_moves(self):
+        with self.lock:
+            return self.untried_actions[:]
+
+    def select_child(self, c_param=math.sqrt(2)):
+        with self.lock:
+            return max(
+                self.children,
+                key=lambda child: child.w / child.visits + c_param * math.sqrt(math.log(self.visits + 1) / (child.visits + 1))
+            )
+
+
+# ======================================
+# RoomLog stub (replace with your class)
+# ======================================
+class RoomLog:
+    def __init__(self, dataset, sede):
+        self.dataset = dataset
+        self.sede = sede
+        self.idx_item = 0
+        self.roomlog = {}
+
+    def clone(self):
+        cloned = RoomLog(self.dataset, self.sede)
+        cloned.idx_item = self.idx_item
+        cloned.roomlog = copy.deepcopy(self.roomlog)
+        return cloned
+
+    def get_legal_moves(self):
+        # Return list of possible moves (stub)
+        return [1, 2, 3, 4]
+
+    def move(self, m):
+        # Apply move (stub)
+        self.idx_item += 1
+
+    def terminal(self):
+        # Terminal condition (stub)
+        return self.idx_item >= 5
+
+    def reward(self):
+        # Example reward
+        return random.random()
+
+
+# ======================================
+# MCTS (UCT) algorithm – single iteration
+# ======================================
+def UCT_search_iteration(root_node, state, c_param):
+    node = root_node
+    st = state.clone()
+
+    # SELECTION
+    while not st.terminal() and len(node.get_untried_moves()) == 0:
+        node = node.select_child(c_param)
+        st.move(node.move)
+
+    # EXPANSION
+    untried = node.get_untried_moves()
+    if untried:
+        m = random.choice(untried)
+        st.move(m)
+        node = node.add_child(m, st)
+
+    # SIMULATION / ROLLOUT
+    while not st.terminal():
+        moves = st.get_legal_moves()
+        st.move(random.choice(moves))
+
+    # BACKPROPAGATION
+    reward = st.reward()
+    while node is not None:
+        node.update(reward)
+        node = node.parent
+
+
+# ======================================
+# Parallel Tree MCTS
+# ======================================
+def tree_parallel_UCT(state, iter_max=1000, c_param=math.sqrt(2), n_threads=4):
+    root = Node(move=None, parent=None, untried_actions=state.get_legal_moves())
+
+    def worker():
+        local_state = state.clone()
+        for _ in range(iter_max // n_threads):
+            UCT_search_iteration(root, local_state, c_param)
+
+    # Run multiple threads sharing the same tree
+    with ThreadPoolExecutor(max_workers=n_threads) as executor:
+        futures = [executor.submit(worker) for _ in range(n_threads)]
+        for f in futures:
+            f.result()  # wait for all threads to finish
+
+    # Choose best move from root
+    best_child = max(root.children, key=lambda c: c.visits) if root.children else None
+    best_move = best_child.move if best_child else None
+    return best_move, root, state
+
+
+# ======================================
+# DEMO
+# ======================================
+def demo():
+    state = RoomLog(dataset="data", sede="A")
+    move, root, _ = tree_parallel_UCT(state, iter_max=1000, n_threads=4)
+    print("Best move:", move)
+    for c in root.children:
+        print(f"Move {c.move}: visits={c.visits}, w={c.w:.2f}")
+
+if __name__ == "__main__":
+    demo()
 
 
 if __name__ == '__main__':
