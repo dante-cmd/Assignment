@@ -14,7 +14,9 @@ import time
 import yaml
 import os
 import json
-import multiprocess  # pyright: ignore[reportMissingImports]
+import multiprocess
+# pyright: ignore[reportMissingImports]
+
 from utils import assign_aulas
 from algo.data import Data
 
@@ -123,6 +125,7 @@ class Rank(Data):
             return self.get_simulation(
                 items, room_log, aulas, aforos, reward_sedes)
         else:
+            assert isinstance(num_simulations, int)
             print(f'Parallel = {num_simulations}')
             return self.get_simulations_parallel(
                 items, room_log, aulas, aforos, reward_sedes, num_simulations)
