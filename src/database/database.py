@@ -1,7 +1,7 @@
 
 from sqlalchemy import create_engine, text
 # from montydb import MontyClient  # type: ignore
-from mongita import MongitaClientDisk
+# from mongita import MongitaClientDisk
 from sqlalchemy.orm import sessionmaker
 from pathlib import Path
 from typing import Optional, List, Dict, Any, Union
@@ -15,12 +15,16 @@ MONTY_DATABASE_URL = "./db/mongodb"
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
+
 def get_sqlite_session():
     return SessionLocal
 
+
 def get_monty_client():
-    client = MongitaClientDisk(MONTY_DATABASE_URL)
-    return client
+    pass
+    # client = MongitaClientDisk(MONTY_DATABASE_URL)
+    # return #client
+
 
 if __name__ == "__main__":
     pass

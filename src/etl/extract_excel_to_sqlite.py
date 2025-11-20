@@ -6,7 +6,7 @@ from typing import List, Dict, Union
 import os
 from unidecode import unidecode
 from database.utils import insert_dataframe, insert_dataframe_by_periodo, query_to_dataframe
-from database.database import get_sqlite_session, get_monty_client
+from database.database import get_sqlite_session #, get_monty_client
 import yaml
 from utils import get_last_n_periodos
 

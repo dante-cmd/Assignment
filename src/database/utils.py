@@ -1,6 +1,6 @@
 
 from sqlalchemy import create_engine, text
-from montydb import MontyClient  # type: ignore
+# from montydb import MontyClient  # type: ignore
 from sqlalchemy.orm import sessionmaker
 from pathlib import Path
 from typing import Optional, List, Dict, Any, Union

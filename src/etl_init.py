@@ -1,8 +1,9 @@
 import yaml
 from etl.extract_excel_to_sqlite import ExcelExtractor
 from etl.transform_sqlite_to_json import DataTransformer
-from etl.load_json import DataLakeLoader
-from database.database import get_sqlite_session, engine, get_monty_client
+# from etl.load_json import DataLakeLoader
+from database.database import (get_sqlite_session, engine)
+# , get_monty_client
 import logging
 
 if __name__ == '__main__':
@@ -28,15 +29,19 @@ if __name__ == '__main__':
         filename=f'{log_path}/{log_file}', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
 
     sqlite_session = get_sqlite_session()
-    monty_client = get_monty_client()
+    # monty_client = get_monty_client()
 
-    extractor = ExcelExtractor(periodo_predict, ult_periodo, n_periodos, full, sqlite_session, excel_path)
+    extractor = ExcelExtractor(periodo_predict, ult_periodo, n_periodos, full,
+                               sqlite_session, excel_path)
+    # extractor.fetch_all()
+
     data_transformer = DataTransformer(
         periodo_predict, ult_periodo, n_periodos, full, 
         sqlite_session, engine, log_path, data_path,
         dim, items_predict, items, items_bim, room_log)
+    data_transformer.transform_all()
     
-    data_lake = DataLakeLoader(monty_client, data_path, dim, items_predict, items, items_bim, room_log)
+    # data_lake = DataLakeLoader(monty_client, data_path, dim, items_predict, items, items_bim, room_log)
     # dias = ["LUN", "MAR"]
     # franjas = ["07:00 - 08:30", "08:45 - 10:15"]
     # result = get_available_aulas(
@@ -54,5 +59,5 @@ if __name__ == '__main__':
 
     # data_transformer.transform_all()
     
-    data_lake.load_all()
+    # data_lake.load_all()
     
