@@ -93,17 +93,15 @@ class RoomLog(Data):
             return []
 
         item = self.items[self.idx_item].copy()
-        aulas = self.aulas.copy()
+        # aulas = self.aulas.copy()
         roomlog = self.roomlog.copy()
         dias = item['DIAS']
         franjas = item['TURNOS']
         aulas_disponibles = self.get_aulas_disponibles(roomlog, franjas, dias)
-        # dias = self.dim_frecuencia[item['FRECUENCIA']]['DIAS']
-        # franjas = self.dim_horario[item['HORARIO']]
 
         available_collection = []
 
-        for idx, (aula, disponible) in enumerate(zip(aulas, aulas_disponibles)):
+        for idx, disponible in enumerate(aulas_disponibles):
             if disponible:
                 available_collection.append(idx)
 
@@ -114,15 +112,14 @@ class RoomLog(Data):
 
 
 class Node:
-    def __init__(self, move=None, parent=None, untried_actions=None,
-                 available_actions=True):
+    def __init__(self, move=None, parent=None, untried_actions=None):
         self.move = move  # the move that led to this node (from parent)
         self.parent = parent  # parent node
         self.children = []  # list of child nodes
         self.w = 0.0  # number of wins
         self.visits = 0  # visit count
         self.untried_actions = [] if untried_actions is None else untried_actions.copy()  # moves not expanded yet
-        self.available_actions = available_actions
+        # self.available_actions = available_actions
 
     def uct_select_child(self, c_param=math.sqrt(2)):
         # Select a child according to UCT (upper confidence bound applied to trees)
@@ -133,9 +130,9 @@ class Node:
         ))
         return best
 
-    def add_child(self, move, untried_actions, available_actions):
-        child = Node(move=move, parent=self, untried_actions=untried_actions,
-                     available_actions=available_actions)
+    def add_child(self, move, untried_actions):
+        child = Node(move=move, parent=self, untried_actions=untried_actions)
+        # available_actions=available_actions
         self.untried_actions.remove(move)
         self.children.append(child)
         return child
@@ -145,25 +142,21 @@ class Node:
         self.w += reward
 
 
-def UCT(state, iter_max=5000, c_param=math.sqrt(2)):
-    # PATH = Path("project")
-    # SEDE = 'Ica'
-    # iter_max = 5000
-    # c_param=math.sqrt(2)
-    # dataset_01 = DataSet(PATH)
-    # state = RoomLog(dataset_01, SEDE)
-    available_actions = state.get_available_actions()
+def UCT(state: RoomLog, available_actions: list, iter_max=5000, c_param=math.sqrt(2)):
+    # state: the representation of RoomLog
+    # iter_max: number of iterations
+    # c_param: parameter for UCT
     root_node = Node(move=None,
                      parent=None,
-                     untried_actions=available_actions,
-                     available_actions=True if len(available_actions) > 0 else False)
+                     untried_actions=available_actions)
 
+    node = root_node
     clone = state.clone()
 
     for i in range(iter_max):
         # i = 1
         rewards = []
-        node = root_node
+        
         clone.idx_item = state.idx_item
         clone.roomlog = copy.deepcopy(state.roomlog.copy())
 
@@ -180,8 +173,7 @@ def UCT(state, iter_max=5000, c_param=math.sqrt(2)):
             rewards.append(reward)
             available_children = clone.get_available_actions()
             node = node.add_child(move=action,
-                                  untried_actions=available_children,
-                                  available_actions=True if len(available_children) > 0 else False)
+                                  untried_actions=available_children)
 
         # 3. Simulation: play randomly until the game ends
         while not clone.is_terminal():
@@ -193,11 +185,14 @@ def UCT(state, iter_max=5000, c_param=math.sqrt(2)):
         # n_items = min(max(clone.idx_item, 1), clone.n_items)
         n_items = clone.n_items
 
+        # Update root node
         while node is not None:
             node.update(sum(rewards) / n_items)
             node = node.parent
+        # At the end of the iteration, node reaches the root node
 
-    # return the move that was most visited
+    # Return the move that was most visited
+    root_node = node
     best_child = max(root_node.children, key=lambda c: c.visits)
     clone.idx_item = state.idx_item
     clone.roomlog = copy.deepcopy(state.roomlog.copy())
@@ -206,18 +201,18 @@ def UCT(state, iter_max=5000, c_param=math.sqrt(2)):
 
 
 def UCT_worker(args):
-    state, iter_max, c_param = args
+    state, available_actions, iter_max, c_param = args
     # Clone state for isolation
     cloned_state = state.clone()
     # RoomLog(state.dataset, state.sede, state.periodo_franja)
     cloned_state.idx_item = state.idx_item
     cloned_state.roomlog = copy.deepcopy(state.roomlog)
 
-    move, root, _ = UCT(cloned_state, iter_max=iter_max, c_param=c_param)
+    move, root, _ = UCT(cloned_state, iter_max=iter_max, c_param=c_param, available_actions=available_actions)
     return root
 
 
-def parallel_UCT(state, iter_max=5000, c_param=math.sqrt(2)):
+def parallel_UCT(state, iter_max=5000, c_param=math.sqrt(2), available_actions: list = None):
     # max_workers=12
     # get n_cores
     # n_cores = os.cpu_count()
@@ -232,13 +227,13 @@ def parallel_UCT(state, iter_max=5000, c_param=math.sqrt(2)):
 
     with multiprocessing.Pool(processes=n_cores) as pool:
         # run mcts
-        results = pool.map(UCT_worker, [(state, iters_per_worker, c_param) for _ in range(n_cores)])
+        results = pool.map(UCT_worker, [(state, available_actions, iters_per_worker, c_param) for _ in range(n_cores)])
         for result in results:
             roots.append(result)
 
     # merge children statistics from workers
     merged_root = Node(move=None, parent=None,
-                       untried_actions=state.get_available_actions())
+                       untried_actions=available_actions)
     move_to_node = {}
 
     for r in roots:
@@ -261,32 +256,41 @@ def run_mcts(periodo, sede, data_path, room_log_path,items_path, items_predict_p
     # path = Path("project")
     # data = DataSet(path)
     # periodo, sede, data_path, room_log_path,items_path, items_predict_path
+    timer = time.time()
     state = RoomLog(periodo, sede, data_path, room_log_path,items_path, items_predict_path)
     aulas = []
-    total_time = time.time()
+    print("Time to load state:",time.time() - timer)
+    # total_time = time.time()
     while state.idx_item < len(state.items):
-        start_time = time.time()
+        timer = time.time()
         result = copy.deepcopy(state.items[state.idx_item].copy())
-        if len(state.get_available_actions()) == 0:
+        print("Time to load item:",time.time() - timer)
+        timer = time.time()
+        available_actions = state.get_available_actions()
+        print("Time to get available actions:",time.time() - timer)
+        timer = time.time()
+        if len(available_actions) == 0:
             result['ASSIGNMENTS'] = {'AULA': None,
                                      'AFORO': None}
             state.idx_item += 1
         else:
-            move, root_node, state = parallel_UCT(state, iter_max=iter_max)
-            # move, root_node, state = UCT(state, iter_max=5000)   # 2000 rollouts from empty board
+            # move, root_node, state = parallel_UCT(state, iter_max=iter_max)
+            timer = time.time()
+            move, _, state = UCT(state, available_actions, iter_max=iter_max)   # 2000 rollouts from empty board
+            print("Time to UCT:",time.time() - timer)
             result['ASSIGNMENTS'] = {'AULA': state.aulas[move],
                                      'AFORO': state.aforos[move]}
             state.step(move)
         aulas.append(result)
-        duration = time.time() - start_time
-        total_duration = time.time() - total_time
-        duration_per_item = total_duration / (state.idx_item)
-        remaining_time = duration_per_item * (len(state.items) - state.idx_item)
-        to_time = lambda x: time.strftime('%H:%M:%S', time.gmtime(x))
-        print(
-            f"Total duration: {to_time(total_duration)} | Actual duration: {to_time(duration)} | Remaining time: {to_time(remaining_time)} | {state.idx_item}/{len(state.items)}",
-            end="\r")
-    print()
+        # duration = time.time() - start_time
+        # total_duration = time.time() - total_time
+        # duration_per_item = total_duration / (state.idx_item)
+        # remaining_time = duration_per_item * (len(state.items) - state.idx_item)
+        # to_time = lambda x: time.strftime('%H:%M:%S', time.gmtime(x))
+        # print(
+        #     f"Total duration: {to_time(total_duration)} | Actual duration: {to_time(duration)} | Remaining time: {to_time(remaining_time)} | {state.idx_item}/{len(state.items)}",
+        #     end="\r")
+    # print()
     # return aulas
 
     print("☰"*(len(sede) + 10))
@@ -306,76 +310,55 @@ def run_mcts(periodo, sede, data_path, room_log_path,items_path, items_predict_p
 # ===============================
 # Node Class (with per-node Lock)
 # ===============================
-class Node:
-    def __init__(self, move=None, parent=None, untried_actions=None):
-        self.move = move
-        self.parent = parent
-        self.children = []
-        self.untried_actions = untried_actions[:] if untried_actions else []
-        self.visits = 0
-        self.w = 0.0
-        self.lock = threading.Lock()  # <-- Lock for this node
-
-    def add_child(self, move, state):
-        with self.lock:
-            if move in self.untried_actions:
-                self.untried_actions.remove(move)
-            child_node = Node(
-                move=move,
-                parent=self,
-                untried_actions=state.get_legal_moves()
-            )
-            self.children.append(child_node)
-        return child_node
-
-    def update(self, reward):
-        with self.lock:
-            self.visits += 1
-            self.w += reward
-
-    def get_untried_moves(self):
-        with self.lock:
-            return self.untried_actions[:]
-
-    def select_child(self, c_param=math.sqrt(2)):
-        with self.lock:
-            return max(
-                self.children,
-                key=lambda child: child.w / child.visits + c_param * math.sqrt(math.log(self.visits + 1) / (child.visits + 1))
-            )
-
-
-# ======================================
-# RoomLog stub (replace with your class)
-# ======================================
-class RoomLog:
-    def __init__(self, dataset, sede):
-        self.dataset = dataset
-        self.sede = sede
-        self.idx_item = 0
-        self.roomlog = {}
-
-    def clone(self):
-        cloned = RoomLog(self.dataset, self.sede)
-        cloned.idx_item = self.idx_item
-        cloned.roomlog = copy.deepcopy(self.roomlog)
-        return cloned
-
-    def get_legal_moves(self):
-        # Return list of possible moves (stub)
-        return [1, 2, 3, 4]
-
-    def move(self, m):
-        # Apply move (stub)
-        self.idx_item += 1
-
-    def terminal(self):
-        # Terminal condition (stub)
-        return self.idx_item >= 5
-
-    def reward(self):
-        # Example reward
-        return random.random()
+# class Node:
+#     def __init__(self, move=None, parent=None, untried_actions=None
+#                  # available_actions=True
+#                  ):
+#         self.move = move
+#         self.parent = parent
+#         self.children = []
+#         self.untried_actions = untried_actions[:] if untried_actions else []
+#         self.visits = 0
+#         self.w = 0.0
+#         self.lock = threading.Lock()  # <-- Lock for this node
+#         # self.available_actions = available_actions
+#     
+#     def uct_select_child(self, c_param=math.sqrt(2)):
+#         # Select a child according to UCT (upper confidence bound applied to trees)
+#         # If a child has 0 visits we consider its UCT value infinite to ensure it's visited.
+#         best = max(self.children, key=lambda child: (
+#             float('inf') if child.visits == 0 else
+#             (child.w / child.visits) + c_param * math.sqrt(math.log(self.visits) / child.visits)
+#         ))
+#         return best
+# 
+#     def add_child(self, move, state):
+#         with self.lock:
+#             if move in self.untried_actions:
+#                 self.untried_actions.remove(move)
+#             child_node = Node(
+#                 move=move,
+#                 parent=self,
+#                 untried_actions=state.get_available_actions()
+#             )
+#             self.children.append(child_node)
+#         return child_node
+# 
+#     def update(self, reward):
+#         with self.lock:
+#             self.visits += 1
+#             self.w += reward
+# 
+#     def get_untried_moves(self):
+#         with self.lock:
+#             return self.untried_actions[:]
+# 
+#     def select_child(self, c_param=math.sqrt(2)):
+#         with self.lock:
+#             return max(
+#                 self.children,
+#                 key=lambda child: child.w / child.visits + c_param * math.sqrt(math.log(self.visits + 1) / (child.visits + 1))
+#             )
 
 
 # ======================================
@@ -442,17 +425,14 @@ def demo():
     for c in root.children:
         print(f"Move {c.move}: visits={c.visits}, w={c.w:.2f}")
 
-if __name__ == "__main__":
-    demo()
-
 
 if __name__ == '__main__':
     # create argparse
+    demo()
     parser = argparse.ArgumentParser()
     parser.add_argument("--sede", type=str, default="Ica")
     parser.add_argument("--iter_max", type=int, default=5000)
     parser.add_argument("--periodo_franja", type=str, default="1. Lun - Vie")
     args = parser.parse_args()
     # run_mcts(args.sede, args.periodo_franja, args.iter_max)
-
 
