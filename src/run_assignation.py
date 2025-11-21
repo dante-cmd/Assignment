@@ -1,6 +1,7 @@
 from algo.hierarchy.rank import Rank
 from algo.data import Data
-from algo.mcts.mcts_assignments_v2 import run_mcts
+from algo.mcts.mcts_assignments_v3 import run_mcts , mcts
+from algo.hierarchy.rank import Rank
 from database.database import get_sqlite_session, engine
 # get_monty_client
 import time
@@ -32,13 +33,10 @@ if __name__ == '__main__':
     periodo = 202511
     sede = 'Ica'
     # rank = Rank(periodo, sede, data_path, room_log, items, items_predict)
-    # dias_ = ["LUN", "MAR"]
-    # franjas_ = ["07:00 - 08:30", "08:45 - 10:15"]
-
-    
-    # result = rank.run_simulation(True, 5)
+    # rank.run_simulation(True, 5000)
 
     run_mcts(periodo, sede, data_path, room_log, items, items_predict, 5000)
+    # mcts(periodo, sede, data_path, room_log, items, items_predict, None, 5000)
 
     
     # result = rank.get_room_log()

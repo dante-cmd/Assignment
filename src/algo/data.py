@@ -129,3 +129,5 @@ class Data:
 
         return aulas, aforos
 
+    def filter_items(self, items:list[dict], periodo_franja:str):
+        return [item for item in items if item['PERIODO_FRANJA'] == periodo_franja]

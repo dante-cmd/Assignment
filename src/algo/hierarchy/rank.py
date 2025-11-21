@@ -14,15 +14,13 @@ import time
 import yaml
 import os
 import json
-import multiprocess
-# pyright: ignore[reportMissingImports]
+import multiprocess # pyright: ignore[reportMissingImports]
 
 from utils import assign_aulas
 from algo.data import Data
 
 USER = os.getlogin()
 PATH_ASSIGNMENT = Path(f'./output')
-
 
 class Rank(Data):
     def __init__(self, periodo: int, sede: str, data_path, room_log_path,
@@ -59,19 +57,24 @@ class Rank(Data):
                 room_log_clone, item['TURNOS'], item['DIAS'])
 
             if sum(disponibles) == 0:
-                collection.append(
-                    assignment(
-                        PERIODO=item['PERIODO'],
-                        SEDE=item['SEDE'],
-                        CODIGO_DE_CURSO=item['CURSO_ACTUAL'],
-                        HORARIO=item['HORARIO'],
-                        N_AULA=np.nan,
-                        FORECAST_ALUMN=item['FORECAST_ALUMN'],
-                        REWARD=-20,
-                        AFORO=0,  # np.NAN
-                        VAC_HAB=0,  # np.NAN
-                        # ID=uuid_packet
-                    ))
+                result = item.copy()
+                result['ASSIGNMENTS.AULA'] = None
+                result['ASSIGNMENTS.AFORO'] = None
+                result['REWARD'] = -20
+                collection.append(result)
+                # collection.append(
+                #     assignment(
+                #         PERIODO=item['PERIODO'],
+                #         SEDE=item['SEDE'],
+                #         CODIGO_DE_CURSO=item['CURSO_ACTUAL'],
+                #         HORARIO=item['HORARIO'],
+                #         N_AULA=np.nan,
+                #         FORECAST_ALUMN=item['FORECAST_ALUMN'],
+                #         REWARD=-20,
+                #         AFORO=0,  # np.NAN
+                #         VAC_HAB=0,  # np.NAN
+                #         # ID=uuid_packet
+                #     ))
             else:
                 aforos_disponibles = [aforo for (aforo, disponible) in zip(aforos, disponibles) if disponible]
                 aulas_disponibles = [aula for (aula, disponible) in zip(aulas, disponibles) if disponible]
@@ -81,13 +84,13 @@ class Rank(Data):
                 vac_hab = np.minimum(aforos_disponibles, item['VAC_ACAD_ESTANDAR'])
 
                 saldos = vac_hab - item['FORECAST_ALUMN']
-                one_hot = np.where(np.abs(saldos) <= 2, 0, 1)
+                # one_hot = np.where(np.abs(saldos) <= 2, 0, 1)
                 # print(vac_hab, saldos, rewards_niveles)
                 reward = np.where(
                     ((saldos >= 0) &
-                     (saldos <= 2)), 2,
+                     (saldos <= 2)), 1 + saldos/vac_hab,
                     np.where(saldos > 2,
-                             0, saldos * 2)) * one_hot
+                             0, saldos * 2)) # * one_hot
                 reward += np.array(rewards_niveles)
                 idxmax = np.argmax(reward)
 
@@ -98,23 +101,44 @@ class Rank(Data):
                 # for dia, franja in product(item['DIAS'], item['TURNOS']):
                 #     room_log_clone[aulas_disponibles[idxmax]]['PROGRAM'][dia][franja] = item['CURSO_ACTUAL']
 
-                collection.append(
-                    assignment(
-                        PERIODO=item['PERIODO'],
-                        SEDE=item['SEDE'],
-                        CODIGO_DE_CURSO=item['CURSO_ACTUAL'],
-                        HORARIO=item['HORARIO'],
-                        N_AULA=aulas_disponibles[idxmax],
-                        FORECAST_ALUMN=item['FORECAST_ALUMN'],
-                        REWARD=reward[idxmax],
-                        AFORO=aforos_disponibles[idxmax],
-                        VAC_HAB=vac_hab[idxmax],
-                        # ID=uuid_packet
-                    ))
+                result = item.copy()
+                result['ASSIGNMENTS.AULA'] = aulas_disponibles[idxmax]
+                result['ASSIGNMENTS.AFORO'] = aforos_disponibles[idxmax]
+                result['REWARD'] = reward[idxmax]
+                collection.append(result)
+                
+                # collection.append(
+                #     assignment(
+                #         PERIODO=item['PERIODO'],
+                #         SEDE=item['SEDE'],
+                #         CODIGO_DE_CURSO=item['CURSO_ACTUAL'],
+                #         HORARIO=item['HORARIO'],
+                #         N_AULA=aulas_disponibles[idxmax],
+                #         FORECAST_ALUMN=item['FORECAST_ALUMN'],
+                #         REWARD=reward[idxmax],
+                #         AFORO=aforos_disponibles[idxmax],
+                #         VAC_HAB=vac_hab[idxmax],
+                #         # ID=uuid_packet
+                #     ))
         # print(collection)
         return collection
 
     def run_simulation(self, parallel: bool = True, num_simulations: None | int = 200):
+        """
+        Run multiple simulations in parallel or serial mode.
+
+        Parameters
+        ----------
+        parallels : bool
+            If True, run multiple simulations in parallel mode.
+        num_simulations : None | int
+            Number of simulations to run. If None, use the default value of 200.
+
+        Returns
+        -------
+        list of assignment objects.
+        """
+        
         room_log = self.get_room_log()
         items = self.get_items_predict()
         reward_sedes = self.get_reward_sedes()
@@ -130,29 +154,42 @@ class Rank(Data):
             return self.get_simulations_parallel(
                 items, room_log, aulas, aforos, reward_sedes, num_simulations)
 
-    def get_simulations_parallel(self, items, room_log: dict, aulas, aforos, reward_sedes,
+    def get_simulations_parallel(self, items:list[dict], room_log: dict, aulas, aforos, reward_sedes,
                                  num_simulations=200):
         """Run multiple simulations in parallel using Pool.map()"""
 
         # Create a list of identical arguments for each simulation
-        args_list = [(items, room_log, aulas, aforos, reward_sedes)] * num_simulations
+        items_lun_vie = self.filter_items(items, '1. Lun - Vie')
+        items_sab = self.filter_items(items, "2. Sab")
+        args_list = ([(items_lun_vie, room_log, aulas, aforos, reward_sedes)] * (num_simulations//2) + 
+                     [(items_sab, room_log, aulas, aforos, reward_sedes)] * (num_simulations - num_simulations//2))
 
         # Use context manager for automatic cleanup
         start = time.time()
-        # multiprocessing.Pool()
 
         with multiprocess.Pool(processes=6) as pool:
             # starmap is used because our function takes multiple arguments
             results = pool.starmap(self.get_simulation, args_list)
 
-        best_data_frame = pd.DataFrame()
-        best_reward = float('-inf')
+        best_lun_vie_df = pd.DataFrame()
+        best_lun_vie_reward = float('-inf')
+        best_sab_df = pd.DataFrame()
+        best_sab_reward = float('-inf')
         for data in results:
             data_frame = pd.DataFrame(data)
             reward = data_frame['REWARD'].sum()
-            if reward > best_reward:
-                best_reward = reward
-                best_data_frame = data_frame.copy()
+            periodo_franja = data_frame['PERIODO_FRANJA'].values[0]
+            assert periodo_franja in ['1. Lun - Vie', '2. Sab']
+            if periodo_franja == '1. Lun - Vie':
+                if reward > best_lun_vie_reward:
+                    best_lun_vie_reward = reward
+                    best_lun_vie_df = data_frame.copy()
+            else:
+                if reward > best_sab_reward:
+                    best_sab_reward = reward
+                    best_sab_df = data_frame.copy()
+
+        best_data_frame = pd.concat([best_lun_vie_df, best_sab_df])
 
         end = time.time()
         gap = end - start
@@ -172,9 +209,11 @@ class Rank(Data):
         print(f"📌 Sede: {self.sede}")
         print(f"⏱ Time: {process_time}")
         print("☰"*(len(self.sede) + 10))
-        best_data_frame.to_excel(PATH_ASSIGNMENT / f'{self.periodo}/asignacion_{self.periodo}_{self.sede}.xlsx',
+        best_data_frame.to_excel(PATH_ASSIGNMENT / f'{self.periodo}/asignacion_{self.__str__().lower()}_{self.periodo}_{self.sede}.xlsx',
                                  index=False)
 
-
+    def __str__(self) -> str:
+        return 'Rank'
+    
 if __name__ == '__main__':
     pass
